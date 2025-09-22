@@ -1,30 +1,107 @@
-# React + TypeScript + Vite
+# MyBlog
+ブログ運営に必要な基本機能を一通り実装しました
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## 実装した主な機能
+- ユーザー認証機能（Firebase Authenticationを使用）
+- ダークモード切り替え（状態管理によるテーマ変更）
+- ブログ記事のCRUD機能（作成・閲覧・編集・削除が可能）
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## サンプルサイト
+- サイト形式の例: https://myblog-b631f.web.app/
+- ブログ例: https://myblog-b631f.web.app/blog?blog=JudyBlog
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
+## Firebase
+firebaseConfigTest.ts を firebaseConfig.ts にリネームして、以下を入力してください：
 ```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+const firebaseConfig = {
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: ""
+};
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## 開発用デプロイ
+```js
+npm run dev
+```
+
+
+## 使用技術
+- フロントエンド: React / TypeScript / Vite
+- バックエンド & ホスティング: Firebase
+  - Firebase Authentication（ユーザー認証）
+  - Firestore Database（記事データの保存・取得）
+  - Firebase Hosting（デプロイ）
+- スタイリング: CSS（必要に応じてUI/UXを意識した調整）
+- 背景画像素材: https://fr.pattern.monster/
+- 開発環境: Node.js v20.11./npm 10.2.4/Git
+
+## 環境変数の設定
+このプロジェクトでは Firebase の設定を環境変数から読み込むようにしています。  
+`.env.example` を参考に `.env` ファイルを作成し、各自の Firebase プロジェクトの値を入力してください。
+
+例（`.env.example` の内容）:
+```env
+VITE_API_KEY=your_api_key_here
+VITE_AUTH_DOMAIN=your_project_id.firebaseapp.com
+VITE_PROJECT_ID=your_project_id
+VITE_STORAGE_BUCKET=your_project_id.appspot.com
+VITE_MESSAGING_SENDER_ID=your_sender_id
+VITE_APP_ID=your_app_id
+VITE_MEASUREMENT_ID=your_measurement_id
+
+```
+
+# MyBlog
+A simple blog application with essential features for blog management.
+
+## Main Features Implemented
+- User authentication (using Firebase Authentication)
+- Dark mode toggle (theme switching with state management)
+- Blog post CRUD functionality (create, read, update, delete)
+
+## Sample Site
+- Site example: https://myblog-b631f.web.app/
+- Blog example: https://myblog-b631f.web.app/blog?blog=JudyBlog
+
+## Firebase
+Rename `firebaseConfigTest.ts` to `firebaseConfig.ts` and fill in the following:
+```js
+const firebaseConfig = {
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: ""
+};
+
+```
+
+## Development Deployment
+```js
+npm run dev
+```
+
+## Environment Variables
+This project loads Firebase configuration from environment variables.  
+Please create a `.env` file based on `.env.example` and fill in your own Firebase project values.
+
+Example (`.env.example`):
+```env
+VITE_API_KEY=your_api_key_here
+VITE_AUTH_DOMAIN=your_project_id.firebaseapp.com
+VITE_PROJECT_ID=your_project_id
+VITE_STORAGE_BUCKET=your_project_id.appspot.com
+VITE_MESSAGING_SENDER_ID=your_sender_id
+VITE_APP_ID=your_app_id
+VITE_MEASUREMENT_ID=your_measurement_id
+
+```
