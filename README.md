@@ -8,8 +8,14 @@
 - ブログ記事のCRUD機能（作成・閲覧・編集・削除が可能）
 
 ## サンプルサイト
-- サイト形式の例: https://myblog-b631f.web.app/
-- ブログ例: https://myblog-b631f.web.app/blog?blog=JudyBlog
+
+【デモサイト】https://myblog-b631f.web.app/blog?blog=TestBlog 
+【ログイン情報】  
+ユーザーID：demo@test.com
+パスワード：test123
+
+デモ用ですので、投稿・削除の操作は自由に行っていただけますが、テストデータであることをご理解ください。
+
 
 ## Firebase
 firebaseConfigTest.ts を firebaseConfig.ts にリネームして、以下を入力してください：
