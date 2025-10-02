@@ -9,10 +9,10 @@
 
 ## サンプルサイト
 
-###【デモサイト】
+【デモサイト】
 https://myblog-b631f.web.app/blog?blog=TestBlog
 
-###【ログイン情報】  
+【ログイン情報】  
 - ユーザーID：demo@test.com
 - パスワード：test123
 
