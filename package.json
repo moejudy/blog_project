@@ -1,8 +1,8 @@
 {
+  "type": "module",
   "name": "myblog",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "server": "json-server -p 3001 --watch db.json",

@@ -1,16 +1,21 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signUp } from "../config/firebaseConfig";
 import { useTheme } from "../context/themeContext";
+import { FirebaseError } from "firebase/app"
+import Popup from "../components/Popup";
 
 const Register: React.FC = () => {
   const { darkMode } = useTheme();
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
     blogTitle: "",
     blogPresentation: ""
   });
+  const [showPopup, setShowPopup] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -25,14 +30,36 @@ const Register: React.FC = () => {
 
     if (!userInfo.email || !userInfo.password || !userInfo.blogTitle || !userInfo.blogPresentation) {
       console.log("Please fill all fields");
+      setError("Please fill all fields")
       return;
     }
   
     try {
       const user = await signUp(userInfo.email, userInfo.password, userInfo.blogTitle, userInfo.blogPresentation);
       console.log("User registered:", user);
-    } catch (error) {
+
+      if (user) {
+        setShowPopup(true);
+      }
+    } catch (err: unknown) {
       console.error("Registration error:", error);
+      let message = "Registration failed: Unknown error occurred.";
+
+      if (err instanceof FirebaseError) {
+          if (err.code === "auth/email-already-in-use") {
+            message = "Registration failed: This email is already in use.";
+          } else if (err.code === "auth/weak-password") {
+            message = "Registration failed: Password is too weak.";
+          } else {
+            message = `Registration failed: ${err.message}`;
+          }
+        } else if (err instanceof Error) {
+          // JS の一般的なエラー
+          message = `Registration failed: ${err.message}`;
+        }
+
+      
+      setError(message);
     }
   };
 
@@ -77,7 +104,8 @@ const Register: React.FC = () => {
           type='text'
           onChange={handleChange}
         />
-      </div>      <div className="input-box">
+      </div>
+      <div className="input-box">
         <label className={`input-label ${darkMode ? "dark-color" : ""}`}>
           Blog Presentation :
         </label>
@@ -89,6 +117,8 @@ const Register: React.FC = () => {
           onChange={handleChange}
         />
       </div>
+
+      {error && <div className="error">{error}</div>}
       <div className="auth-sub">
         <p className={darkMode ? "dark-color" : ""}>
           You already have your account?
@@ -107,6 +137,17 @@ const Register: React.FC = () => {
         </button>
       </div>
     </form>
+
+
+
+    {showPopup && (
+      <Popup 
+        title="Registeration Success"
+        message="Please login"
+        onClose={() => navigate("/login")}
+      
+      />
+    )}
 
   </div>
   )
